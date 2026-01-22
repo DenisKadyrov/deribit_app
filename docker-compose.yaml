@@ -1,10 +1,10 @@
 services:
   db:
-    image: postgres:16
+    image: postgres:15
     container_name: prices_db
     environment:
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: postgres
+      POSTGRES_USER: admin 
+      POSTGRES_PASSWORD: secret_password 
       POSTGRES_DB: prices
     ports:
       - "5433:5432"
@@ -14,4 +14,3 @@ services:
 
 volumes:
   postgres_data:
-
