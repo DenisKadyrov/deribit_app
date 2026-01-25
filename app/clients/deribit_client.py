@@ -1,6 +1,9 @@
 import aiohttp
 import asyncio
 
+from core.config import settings
+from core.database import AsyncSessionLocal 
+
 
 class DeribitClient:
   def __init__(self, base_url: str):
@@ -17,7 +20,7 @@ class DeribitClient:
 
 
 async def main():
-  deribit_client = DeribitClient("https://www.deribit.com/api/v2")
+  deribit_client = DeribitClient(settings.DERIBIT_URL)
   res = await deribit_client.get_index_price("eth")
   print(res)
 
