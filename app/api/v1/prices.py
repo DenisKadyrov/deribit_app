@@ -3,35 +3,43 @@ from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.core.database import get_session
 from app.repositories.price import PriceRepository
-from app.services.price_service import PriceService
 from app.schemas.price import PriceOut
-
-from typing import List
+from app.services.price_service import PriceService
 
 router = APIRouter()
 
-async def get_price_service(session: AsyncSession = Depends(get_session)) -> PriceService:
+
+async def get_price_service(
+    session: AsyncSession = Depends(get_session),
+) -> PriceService:
     repo = PriceRepository(session)
     return PriceService(repo)
+
 
 async def ticker_lower(ticker: str = Query(..., description="Currency ticker")) -> str:
     return ticker.lower()
 
 
-@router.get("/all", response_model=List[PriceOut])
-async def get_all(ticker: str = Depends(ticker_lower), service: PriceService = Depends(get_price_service)):
+@router.get("/all", response_model=list[PriceOut])
+async def get_all(
+    ticker: str = Depends(ticker_lower),
+    service: PriceService = Depends(get_price_service),
+):
     return await service.get_all(ticker)
 
 
 @router.get("/last", response_model=PriceOut)
-async def get_last(ticker: str = Depends(ticker_lower), service: PriceService = Depends(get_price_service)):
+async def get_last(
+    ticker: str = Depends(ticker_lower),
+    service: PriceService = Depends(get_price_service),
+):
     price = await service.get_last(ticker)
     if price is None:
         raise HTTPException(status_code=404, detail="No prices found")
     return price
 
 
-@router.get("/by-date", response_model=List[PriceOut])
+@router.get("/by-date", response_model=list[PriceOut])
 async def get_by_date(
     ticker: str = Depends(ticker_lower),
     ts_from: int = Query(...),

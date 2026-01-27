@@ -1,0 +1,25 @@
+[tool.black]
+line-length = 88
+target-version = ["py312"]
+
+[tool.ruff]
+line-length = 88
+target-version = "py312"
+select = [
+    "E",   # pycodestyle
+    "F",   # pyflakes
+    "B",   # bugbear
+    "I",   # import sorting
+    "UP",  # pyupgrade
+]
+ignore = [
+    "B008",  # allow function calls in defaults (FastAPI Depends)
+]
+
+[tool.ruff.isort]
+known-first-party = ["app"]
+
+[tool.mypy]
+python_version = "3.12"
+strict = false
+ignore_missing_imports = true

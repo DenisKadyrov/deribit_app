@@ -1,13 +1,14 @@
 import asyncio
 import time
 from decimal import Decimal
+
 import aiohttp
 
 from app.celery_app import celery_app
-from app.core.database import AsyncSessionLocal
-from app.models.price import Price
 from app.clients.deribit_client import DeribitClient
 from app.core.config import settings
+from app.core.database import AsyncSessionLocal
+from app.models.price import Price
 
 
 @celery_app.task(

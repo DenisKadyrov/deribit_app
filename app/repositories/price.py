@@ -1,4 +1,4 @@
-from sqlalchemy import select, desc
+from sqlalchemy import desc, select
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.models.price import Price
@@ -29,8 +29,7 @@ class PriceRepository:
 
     async def get_by_date(self, ticker: str, ts_from: int, ts_to: int):
         stmt = select(Price).where(
-            Price.ticker == ticker,
-            Price.timestamp.between(ts_from, ts_to)
+            Price.ticker == ticker, Price.timestamp.between(ts_from, ts_to)
         )
         result = await self.session.execute(stmt)
         return result.scalars().all()

@@ -1,4 +1,5 @@
 from celery import Celery
+
 from app.core.config import settings
 
 celery_app = Celery(
@@ -16,5 +17,3 @@ celery_app.conf.update(
 )
 
 celery_app.autodiscover_tasks(["app.tasks"])
-
-import app.tasks.fetch_prices

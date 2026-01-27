@@ -7,11 +7,7 @@ class Settings(BaseSettings):
     REDIS_BACKEND_URL: str
     REDIS_BROKER_URL: str
 
-    model_config = SettingsConfigDict(
-        env_file = ".env",
-        env_file_encoding = "utf-8"
-    )
+    model_config = SettingsConfigDict(env_file=".env", env_file_encoding="utf-8")
 
 
 settings = Settings()
-

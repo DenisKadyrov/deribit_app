@@ -1,6 +1,9 @@
 from decimal import Decimal
+
 from pydantic import BaseModel
+
 from app.models.price import Price
+
 
 class PriceOut(BaseModel):
     ticker: str
