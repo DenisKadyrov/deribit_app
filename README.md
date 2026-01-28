@@ -74,7 +74,7 @@ docker compose exec api alembic upgrade head
 
 Приложение читает переменные из `.env` (файл **игнорируется** git-ом):
 ```bash
-cp .env.example .env
+mv .env.example .env
 ```
 
 ### Установка зависимостей
