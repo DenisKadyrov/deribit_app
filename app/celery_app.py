@@ -17,3 +17,5 @@ celery_app.conf.update(
 )
 
 celery_app.autodiscover_tasks(["app.tasks"])
+
+from app.tasks import fetch_prices
