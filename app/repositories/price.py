@@ -13,11 +13,7 @@ class PriceRepository:
         await self.session.commit()
 
     async def get_all(self, ticker: str) -> list[Price]:
-        stmt = (
-            select(Price)
-            .where(Price.ticker == ticker)
-            .order_by(Price.ts.asc())
-        )
+        stmt = select(Price).where(Price.ticker == ticker).order_by(Price.ts.asc())
         result = await self.session.execute(stmt)
         return result.scalars().all()
 
