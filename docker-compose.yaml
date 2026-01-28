@@ -27,7 +27,7 @@ services:
   celery_worker:
     build: .
     container_name: celery_worker
-    command: celery -A app.celery_app worker -l debug
+    command: celery -A app.celery_app worker -l info
     env_file:
       - .env
     depends_on:
@@ -37,7 +37,7 @@ services:
   celery_beat:
     build: .
     container_name: celery_beat
-    command: celery -A app.celery_beat beat -l debug
+    command: celery -A app.celery_beat beat -l info
     env_file:
       - .env
     depends_on:
